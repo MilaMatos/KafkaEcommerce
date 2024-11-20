@@ -1,5 +1,4 @@
 import sys
-
 # Compatibilidade para versões do Python >= 3.12
 if sys.version_info >= (3, 12):
     import six.moves # type: ignore
@@ -28,7 +27,6 @@ PRODUCTS = [
 ]
 
 def generate_order():
-    """Gera uma ordem de venda fictícia com produtos predefinidos."""
     return {
         "order_id": fake.uuid4(),
         "client_document": fake.ssn(),
@@ -39,16 +37,15 @@ def generate_order():
                 "price": round(random.uniform(10, 100), 2)
             } for _ in range(random.randint(1, 3))
         ],
-        "total_value": 0,  # Será calculado posteriormente
+        "total_value": 0,
         "sale_datetime": fake.iso8601()
     }
 
 def calculate_total(order):
-    """Calcula o valor total do pedido."""
     return sum(product["quantity"] * product["price"] for product in order["products"])
 
 def send_order(producer, topic):
-    """Formata e envia uma ordem ao tópico Kafka."""
+    # Formata e envia uma ordem ao tópico Kafka
     order = generate_order()
     order['total_value'] = calculate_total(order)
     producer.send(topic, value=order)
