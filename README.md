@@ -72,7 +72,7 @@ Este projeto tem como objetivo desenvolver uma solução de processamento de dad
    ```bash
    $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties
    ```
-3. **CCrie o tópico `ecommerce_sales`**:
+3. **Crie o tópico `ecommerce_sales`**:
    ```bash
    $KAFKA_HOME/bin/kafka-topics.sh --create --topic ecommerce_sales --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
    ```
